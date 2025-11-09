@@ -2,10 +2,16 @@
 {% block title %}Detalle de Propiedad{% endblock %}
 {% block content %}
 <div class="card shadow p-4 mb-4">
-  <h2 class="mb-3 text-primary">{{ propiedad.direccion }}</h2>
-
   <div class="row">
+    <div class="col-md-4 text-center">
+      <!-- Imagen de ejemplo (no real, coherente con teoría del curso) -->
+      <img src="https://static.wikia.nocookie.net/spongeisfum/images/a/af/Spongebob%27s_House.png/revision/latest/thumbnail/width/360/height/450?cb=20190704050349" 
+           alt="Propiedad" width="160" class="mb-3 rounded">
+    </div>
+
     <div class="col-md-8">
+      <h2 class="mb-3 text-primary">{{ propiedad.direccion }}</h2>
+
       <p><strong>Descripción:</strong></p>
       <p>{{ propiedad.descripcion }}</p>
 
