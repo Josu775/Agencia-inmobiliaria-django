@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Detalle del Agente{% endblock %}
+{% block content %}
+<div class="card shadow p-4">
+  <h2>{{ agente.nombre }}</h2>
+  <p><strong>Email:</strong> {{ agente.email }}</p>
+  <p><strong>Teléfono:</strong> {{ agente.telefono }}</p>
+  <a href="{% url 'lista_agentes' %}" class="btn btn-secondary mt-3">Volver</a>
+</div>
+{% endblock %}

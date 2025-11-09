@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Detalles de la Propiedad{% endblock %}
+{% block content %}
+<div class="card shadow p-4">
+  <h2>{{ propiedad.direccion }}</h2>
+  <p><strong>Precio:</strong> {{ propiedad.precio }} €</p>
+  <p>{{ propiedad.descripcion }}</p>
+  <p><strong>Agente:</strong> {{ propiedad.agente.nombre }}</p>
+  {% if propiedad.cliente %}
+  <p><strong>Cliente:</strong> {{ propiedad.cliente.nombre }}</p>
+  {% endif %}
+  <a href="{% url 'lista_propiedades' %}" class="btn btn-secondary mt-3">Volver</a>
+</div>
+{% endblock %}

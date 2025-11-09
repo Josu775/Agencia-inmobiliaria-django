@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Detalle del Cliente{% endblock %}
+{% block content %}
+<div class="card shadow p-4">
+  <h2>{{ cliente.nombre }}</h2>
+  <p><strong>Email:</strong> {{ cliente.email }}</p>
+  <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+  <a href="{% url 'lista_clientes' %}" class="btn btn-secondary mt-3">Volver</a>
+</div>
+{% endblock %}

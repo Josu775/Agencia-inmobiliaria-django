@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Lista de Propiedades{% endblock %}
+{% block content %}
+<h2 class="mb-4">Propiedades disponibles</h2>
+
+<div class="row">
+  {% for p in propiedades %}
+  <div class="col-md-4 mb-3">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ p.direccion }}</h5>
+        <p class="card-text"><strong>Precio:</strong> {{ p.precio }} €</p>
+        <a href="{% url 'detalle_propiedad' p.id %}" class="btn btn-primary btn-sm">Ver detalles</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>No hay propiedades registradas.</p>
+  {% endfor %}
+</div>
+
+<a href="{% url 'index' %}" class="btn btn-secondary mt-3">Volver al inicio</a>
+{% endblock %}
