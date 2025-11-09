@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Inicio - Agencia Inmobiliaria{% endblock %}
 {% block content %}
-<div class="text-center">
-  <h1 class="mb-4">Bienvenido a la Agencia Inmobiliaria</h1>
-  <p class="lead">Explora nuestras propiedades, agentes y clientes registrados.</p>
-</div>
+<h1>Bienvenido a nuestra Agencia Inmobiliaria</h1>
+<p>Explora nuestras propiedades, agentes y clientes registrados.</p>
+
+<p>
+  <a href="{% url 'lista_propiedades' %}">Ver Propiedades</a> |
+  <a href="{% url 'lista_agentes' %}">Ver Agentes</a> |
+  <a href="{% url 'lista_clientes' %}">Ver Clientes</a>
+</p>
 {% endblock %}

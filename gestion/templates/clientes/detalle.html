@@ -1,25 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Detalle del Cliente{% endblock %}
 {% block content %}
-<div class="card shadow p-4 mb-4">
-  <div class="row">
-    <div class="col-md-4 text-center">
-     
-      <img src="https://s2.ppllstatics.com/elcomercio/www/pre2017/multimedia/noticias/201706/19/media/Sin-t%C3%ADtulo-2.jpg" 
-           alt="Cliente" width="120" class="mb-3 rounded-circle">
-    </div>
+<h1>Detalle del Cliente</h1>
 
-    <div class="col-md-8">
-      <h3 class="text-primary mb-3">{{ cliente.nombre }}</h3>
-      <p><strong>Email:</strong> {{ cliente.email }}</p>
-      <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+{% if cliente.imagen %}
+  <img src="{{ cliente.imagen.url }}" alt="Cliente" width="150" style="border-radius:50%; margin-bottom:10px;">
+{% endif %}
 
-      
+<h2>{{ cliente.nombre }}</h2>
+<p><strong>Email:</strong> {{ cliente.email }}</p>
+<p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
 
-      
-    </div>
-  </div>
-</div>
-
-<a href="{% url 'lista_clientes' %}" class="btn btn-outline-secondary">← Volver a la lista</a>
+<p><a href="{% url 'lista_clientes' %}">← Volver a la lista</a></p>
 {% endblock %}

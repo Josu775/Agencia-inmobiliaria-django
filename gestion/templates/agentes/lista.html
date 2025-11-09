@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% block title %}Lista de Agentes{% endblock %}
 {% block content %}
-<h2 class="mb-4">Nuestros Agentes</h2>
+<h1>Nuestros Agentes</h1>
 
-<ul class="list-group">
-  {% for a in agentes %}
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <span>{{ a.nombre }} - {{ a.email }}</span>
-    <a href="{% url 'detalle_agente' a.id %}" class="btn btn-outline-primary btn-sm">Ver detalles</a>
-  </li>
-  {% empty %}
+{% if agentes %}
+  <ul>
+    {% for a in agentes %}
+      <li style="margin-bottom:10px;">
+        <strong>{{ a.nombre }}</strong> — {{ a.email }}<br>
+        <a href="{% url 'detalle_agente' a.id %}">Ver detalles</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
   <p>No hay agentes registrados.</p>
-  {% endfor %}
-</ul>
+{% endif %}
 
-<a href="{% url 'index' %}" class="btn btn-secondary mt-3">Volver al inicio</a>
+<p><a href="{% url 'index' %}">← Volver al inicio</a></p>
 {% endblock %}
