@@ -3,10 +3,22 @@
 {% block content %}
 <h1>Clientes</h1>
 
+<div id="ajax-info" style="
+    display:none;
+    margin: 15px 0;
+    padding: 15px;
+    background: #fafafa;
+    border-left: 4px solid #00C5EE;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    font-size: 0.9em;
+    line-height: 1.4em;
+"></div>
+
 {% if clientes %}
   <ul>
     {% for c in clientes %}
-      <li style="margin-bottom:10px;">
+        <li class="item-cliente" data-id="{{ c.id }}" style="margin-bottom:10px;">
         <strong>{{ c.nombre }}</strong> — {{ c.email }}<br>
         <a href="{% url 'detalle_cliente' c.id %}">Ver detalles</a>
       </li>
@@ -17,4 +29,45 @@
 {% endif %}
 
 <p><a href="{% url 'index' %}">← Volver al inicio</a></p>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(function() {
+
+    let clienteMostrado = null;
+
+    $('.item-cliente').click(function() {
+
+        let id = $(this).data('id');
+
+        // Si haces clic en el mismo → cerrar
+        if (clienteMostrado === id) {
+            $('#ajax-info').fadeOut(300);
+            clienteMostrado = null;
+            return;
+        }
+
+        // Hacer AJAX
+        $.get('/ajax/cliente/' + id + '/', function(data) {
+
+            $('#ajax-info').html(
+                "<strong>Nombre:</strong> " + data.nombre + "<br>" +
+                "<strong>Email:</strong> " + data.email + "<br>" +
+                "<strong>Teléfono:</strong> " + data.telefono
+            );
+
+            // Mostrar si estaba oculto
+            if (!$('#ajax-info').is(":visible")) {
+                $('#ajax-info').fadeIn(200);
+            }
+
+            // Guardar cliente actual
+            clienteMostrado = id;
+        });
+
+    });
+
+});
+</script>
 {% endblock %}

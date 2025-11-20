@@ -1,29 +1,62 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Propiedad, Agente, Cliente
+from django.http import JsonResponse
+from django.views.generic import ListView, DetailView
 
 def index(request):
     return render(request, 'index.html')
 
-def lista_propiedades(request):
-    propiedades = Propiedad.objects.all()
-    return render(request, 'propiedades/lista.html', {'propiedades': propiedades})
+class PropiedadListView(ListView):
+    model = Propiedad
+    template_name = 'propiedades/lista.html'
+    context_object_name = 'propiedades'
 
-def detalle_propiedad(request, id):
+class PropiedadDetailView(DetailView):
+    model = Propiedad
+    template_name = 'propiedades/detalle.html'
+    context_object_name = 'propiedad'
+
+class AgenteListView(ListView):
+    model = Agente
+    template_name = 'agentes/lista.html'
+    context_object_name = 'agentes'
+
+class AgenteDetailView(DetailView):
+    model = Agente
+    template_name = 'agentes/detalle.html'
+    context_object_name = 'agente'
+
+class ClienteListView(ListView):
+    model = Cliente
+    template_name = 'clientes/lista.html'
+    context_object_name = 'clientes'
+
+class ClienteDetailView(DetailView):
+    model = Cliente
+    template_name = 'clientes/detalle.html'
+    context_object_name = 'cliente'
+
+def ajax_propiedad(request, id):
     propiedad = get_object_or_404(Propiedad, pk=id)
-    return render(request, 'propiedades/detalle.html', {'propiedad': propiedad})
+    return JsonResponse({
+        "agente": propiedad.agente.nombre if propiedad.agente else "Sin agente",
+        "cliente": propiedad.cliente.nombre if propiedad.cliente else "Sin cliente",
+        "precio": propiedad.precio,
+        "descripcion": propiedad.descripcion,
+    })
 
-def lista_agentes(request):
-    agentes = Agente.objects.all()
-    return render(request, 'agentes/lista.html', {'agentes': agentes})
-
-def detalle_agente(request, id):
+def ajax_agente(request, id):
     agente = get_object_or_404(Agente, pk=id)
-    return render(request, 'agentes/detalle.html', {'agente': agente})
+    return JsonResponse({
+        "nombre": agente.nombre,
+        "telefono": agente.telefono,
+        "email": agente.email,
+    })
 
-def lista_clientes(request):
-    clientes = Cliente.objects.all()
-    return render(request, 'clientes/lista.html', {'clientes': clientes})
-
-def detalle_cliente(request, id):
+def ajax_cliente(request, id):
     cliente = get_object_or_404(Cliente, pk=id)
-    return render(request, 'clientes/detalle.html', {'cliente': cliente})
+    return JsonResponse({
+        "nombre": cliente.nombre,
+        "email": cliente.email,
+        "telefono": cliente.telefono,
+    })

@@ -3,10 +3,22 @@
 {% block content %}
 <h1>Nuestros Agentes</h1>
 
+<div id="ajax-info" style="
+    display:none;
+    margin: 15px 0;
+    padding: 15px;
+    background: #fafafa;
+    border-left: 4px solid #00C5EE;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    font-size: 0.9em;
+    line-height: 1.4em;
+"></div>
+
 {% if agentes %}
   <ul>
     {% for a in agentes %}
-      <li style="margin-bottom:10px;">
+        <li class="item-agente" data-id="{{ a.id }}" style="margin-bottom:10px;">
         <strong>{{ a.nombre }}</strong> — {{ a.email }}<br>
         <a href="{% url 'detalle_agente' a.id %}">Ver detalles</a>
       </li>
@@ -17,4 +29,44 @@
 {% endif %}
 
 <p><a href="{% url 'index' %}">← Volver al inicio</a></p>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(function() {
+
+    let agenteMostrado = null;
+
+    $('.item-agente').click(function() {
+
+        let id = $(this).data('id');
+
+        // Si clicas el mismo → cerrar
+        if (agenteMostrado === id) {
+            $('#ajax-info').fadeOut(300);
+            agenteMostrado = null;
+            return;
+        }
+
+        // AJAX
+        $.get('/ajax/agente/' + id + '/', function(data) {
+
+            $('#ajax-info').html(
+                "<strong>Nombre:</strong> " + data.nombre + "<br>" +
+                "<strong>Teléfono:</strong> " + data.telefono + "<br>" +
+                "<strong>Email:</strong> " + data.email
+            );
+
+            // Mostrar si estaba oculto
+            if (!$('#ajax-info').is(":visible")) {
+                $('#ajax-info').fadeIn(200);
+            }
+
+            agenteMostrado = id;
+        });
+
+    });
+
+});
+</script>
 {% endblock %}
