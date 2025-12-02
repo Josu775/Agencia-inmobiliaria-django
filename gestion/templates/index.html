@@ -11,13 +11,10 @@
   <a href="{% url 'lista_clientes' %}">Ver Clientes</a>
 </p>
 
-<!-- BOTÓN PARA EL EFECTO jQuery -->
-<!-- *** TU BOTÓN DEBE ESTAR AQUÍ DENTRO *** -->
 <p>
   <button id="btn-info">Mostrar información de la agencia</button>
 </p>
 
-<!-- DIV OCULTO QUE SE DESPLIEGA -->
 <div id="info-agencia" style="display:none; margin-top:10px;">
   <p>
     Nuestra agencia ofrece asesoramiento personalizado, gestión de visitas y 
@@ -29,27 +26,22 @@
 
 {% block extra_js %}
 <script>
+  // Comprobación jQuery
   $(function () {
-    $("#btn-info").click(function () {
 
-      // Efecto jQuery: slideToggle
-      $("#info-agencia").slideToggle(300);
+      $("#btn-info").click(function () {
 
-      // Cambiar texto del botón
-      if ($(this).text() === "Mostrar información de la agencia") {
-        $(this).text("Ocultar información de la agencia");
-      } else {
-        $(this).text("Mostrar información de la agencia");
-      }
-    });
+        // Efecto jQuery: slideToggle
+        $("#info-agencia").slideToggle(300);
+
+        // Cambiar texto del botón
+        if ($(this).text() === "Mostrar información de la agencia") {
+          $(this).text("Ocultar información de la agencia");
+        } else {
+          $(this).text("Mostrar información de la agencia");
+        }
+      });
+
   });
-</script>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    $(function () {
-        alert("jQuery funciona");
-    });
 </script>
 {% endblock %}
