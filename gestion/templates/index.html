@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Inicio - Agencia Inmobiliaria{% endblock %}
+
 {% block content %}
 <h1>Bienvenido a nuestra Agencia Inmobiliaria</h1>
 <p>Explora nuestras propiedades, agentes y clientes registrados.</p>
@@ -9,4 +10,25 @@
   <a href="{% url 'lista_agentes' %}">Ver Agentes</a> |
   <a href="{% url 'lista_clientes' %}">Ver Clientes</a>
 </p>
+
+<!-- *** TU BOTÓN DEBE ESTAR AQUÍ DENTRO *** -->
+<p>
+  <button id="btn-info">Mostrar información de la agencia</button>
+</p>
+
+<div id="info-agencia" style="display:none; margin-top:10px;">
+  <p>
+    Nuestra agencia ofrece asesoramiento personalizado, gestión de visitas y 
+    propiedades verificadas para mayor seguridad del cliente.
+  </p>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(function () {
+        alert("jQuery funciona");
+    });
+</script>
 {% endblock %}
