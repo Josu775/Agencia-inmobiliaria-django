@@ -12,6 +12,7 @@
 </p>
 
 <!-- BOTÓN PARA EL EFECTO jQuery -->
+<!-- *** TU BOTÓN DEBE ESTAR AQUÍ DENTRO *** -->
 <p>
   <button id="btn-info">Mostrar información de la agencia</button>
 </p>
@@ -42,5 +43,13 @@
       }
     });
   });
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(function () {
+        alert("jQuery funciona");
+    });
 </script>
 {% endblock %}

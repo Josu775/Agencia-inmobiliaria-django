@@ -316,28 +316,3 @@ table tr td
   color: #47433F;
   border-top: 1px solid #FFF;}
 
-  /* --- FORZAR QUE EL FOOTER QUEDE ABAJO --- */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#main {
-  min-height: 100%;
-  position: relative;
-}
-
-#site_content {
-  overflow: visible !important; /* anula el overflow hidden del tema */
-  padding-bottom: 120px; /* deja hueco para el footer */
-}
-
-#footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: auto; /* altura real del footer */
-  margin-bottom: auto;
-}
